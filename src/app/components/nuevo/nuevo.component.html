@@ -1,1 +1,47 @@
-<p>nuevo works!</p>
+<div class="container">
+    <h2>Agregar Producto</h2>
+    <form [formGroup]="nuevoForm" (ngSubmit)="postForm(nuevoForm.value)">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Nombre Producto</label>
+            <input type="text" class="form-control" placeholder="Nombre del Producto" formControlName="NombreProducto">
+        </div><br>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">ID Producto</label>
+            <input type="text" class="form-control" placeholder="Id del Producto" formControlName="idProducto">
+        </div><br>
+        <div class="form-group row">
+            <div class="col">
+                <label for="exampleFormControlInput1">Marca</label>
+                <input type="text" class="form-control" placeholder="Marca del producto" formControlName="idMarca">
+            </div>
+            <div class="col">
+                <label for="exampleFormControlInput1">Modelo</label>
+                <input type="text" class="form-control" placeholder="Modelo del producto" formControlName="idModelo">
+            </div>
+            <div class="col">
+                <label for="exampleFormControlInput1">Color</label>
+                <input type="text" class="form-control" placeholder="Color del producto" formControlName="idColor">
+            </div>
+        </div><br>
+        <div class="form-group row">
+            <div class="col">
+                <label for="exampleFormControlInput1">Talla</label>
+                <input type="text" class="form-control" placeholder="Talla del producto" formControlName="idTalla">
+            </div>
+            <div class="col">
+                <label for="exampleFormControlInput1">Precio</label>
+                <input type="text" class="form-control" placeholder="Precio del producto" formControlName="PrecioVenta">
+            </div>
+        </div>
+
+        <br><br>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success" (click)="regresar()">Regresar</button>
+          </div>
+        </div>
+    </form>
+</div>

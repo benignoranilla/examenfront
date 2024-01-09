@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ListaProductosI } from '../../model/listaProductos.interface';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ExporterService } from '../../servicios/api/exporter.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-productos',
@@ -21,6 +22,7 @@ export class ProductosComponent_Factory implements OnInit, ControlValueAccessor{
 
     productos!: ListaProductosI[];
     arrayproductos = [];
+    ExcelData:any;
 
     constructor(private api:ApiService_Factory, private router:Router, private exportService:ExporterService){}
 
@@ -51,5 +53,21 @@ export class ProductosComponent_Factory implements OnInit, ControlValueAccessor{
     exportAsXLSX():void{
         this.exportService.exportToExcel(this.productos, 'my_export');
     }
+
+    ReadExcel(event:any){
+      
+      let file = event.target.files[0];
+      let fileReader = new FileReader();
+
+      fileReader.readAsBinaryString(file);
+      fileReader.onload = (e)=>{
+        var workbook = XLSX.read(fileReader.result, {type:'binary'});
+        var sheetNames = workbook.SheetNames;
+        this.ExcelData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNames[0]]);
+        console.log(this.ExcelData)
+      }
+
+    }
+
   
 }

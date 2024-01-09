@@ -34,7 +34,15 @@
           </tbody>
     </table>
   <br>
-  <button type="submit" class="btn btn-primary" (click)="exportAsXLSX()">Exportar</button>
+  <div class="row">
+    <div class="col">
+      <button type="submit" class="btn btn-primary" (click)="exportAsXLSX()">Exportar EXCEL</button>
+    </div>
+    <div class="col">
+      <input type="file" (change)="ReadExcel($event)">
+    </div>
+  </div>
+  <br><br>
   </div>
   
 </body>

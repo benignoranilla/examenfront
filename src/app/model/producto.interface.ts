@@ -1,5 +1,4 @@
 export interface EditarProductoI{
-    id: string,
     idProducto?: string,
     NombreProducto: string,
     idMarca:string,

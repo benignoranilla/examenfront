@@ -35,6 +35,19 @@
         </div>
 
         <br><br>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn btn-danger" (click)="eliminar()">Eliminar</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success" (click)="regresar()">Regresar</button>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn btn-primary" (click)="createPdf()">Exportar PDF</button>
+          </div>
+        </div>
     </form>
 </div>

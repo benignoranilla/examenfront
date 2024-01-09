@@ -4,6 +4,13 @@ import { EditarProductoI } from '../../model/producto.interface';
 import { ApiService_Factory } from '../../servicios/api/api.service';
 import {FormGroup, FormControl, Validators, NG_VALUE_ACCESSOR} from '@angular/forms'
 import { ControlValueAccessor } from '@angular/forms';
+import pdfMake  from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { jsPDF } from 'jspdf';
+
+
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+pdfMake.vfs= pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-editar',
@@ -36,7 +43,6 @@ export class EditarComponent implements OnInit, ControlValueAccessor{
 
   initializeForm(){
   this.editarForm = new FormGroup({
-    id: new FormControl(""),
     idProducto: new FormControl(""),
     NombreProducto: new FormControl(""),
     idMarca: new FormControl(""),
@@ -51,7 +57,6 @@ export class EditarComponent implements OnInit, ControlValueAccessor{
       let productoid = this.activaterouter.snapshot.paramMap.get('id');
       this.api.getProducto(productoid).subscribe(data => {
         this.editarForm.patchValue({
-          "id": this.datosProducto?.id,
           "idProducto": "1",
           "NombreProducto": "Camisa",
           "idMarca": 1,
@@ -72,4 +77,31 @@ export class EditarComponent implements OnInit, ControlValueAccessor{
     })
   }
 
+  eliminar(){
+
+    let datos:EditarProductoI = this.editarForm.value;
+    this.api.deleteProducto(datos).subscribe(data =>{
+      console.log("eliminar");
+    })
+  }
+
+  regresar(){
+    this.router.navigate(['productos'])
+  }
+
+
+  createPdf(){
+    const pdfDefinition = new jsPDF();
+
+    pdfDefinition.setFont('Helvetica');
+    pdfDefinition.setFontSize(18);
+    pdfDefinition.text(
+      `Lista de Productos for ${this.datosProducto?.NombreProducto}`,
+      60,
+      20
+    );
+
+    pdfDefinition.save('demoPDF.pdf');
+
+  }
 }

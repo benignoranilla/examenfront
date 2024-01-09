@@ -35,4 +35,24 @@ export class ApiService_Factory{
 
         return this.http.put<ResponseI>(direccion, form);
     }
+
+    deleteProducto(from: EditarProductoI):Observable<ResponseI>{
+        
+        let direccion = this.url + "producto/";
+        let options = {
+            headers: new HttpHeaders({
+                'Conten-type': 'application/json'
+            }),
+            body:from
+        }
+
+        return this.http.delete<ResponseI>(direccion, options);
+    }
+
+    postProducto(form:EditarProductoI):Observable<ResponseI>{
+
+        let direccion = this.url + "producto";
+
+        return this.http.post<ResponseI>(direccion, form);
+    }
 }
